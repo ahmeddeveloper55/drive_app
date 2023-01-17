@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import '../model/File_modle.dart';
 import '../service/Apiservice.dart';
 
@@ -8,14 +10,49 @@ class HomePage_provider with ChangeNotifier {
 
   // List<File> _fileList = [];
   String _searchTerm = '';
+  late String _fileName;
+  dynamic _response;
+ File? file;
 
   List<FileModle> get fileList => _list;
   String get searchTerm => _searchTerm;
+  String get fileName => _fileName;
+  dynamic get response => _response;
   set searchTerm(String value) {
     _searchTerm = value;
     notifyListeners();
   }
+  void selectFile() async {
+    final result = await FilePicker.platform.pickFiles(type: FileType.any,allowMultiple: false);
+    if(result != null) {
+      file = File(result.files.first.path!);
+      _fileName = result.files.first.name;
+      notifyListeners();
+    } else {
+      print("No file selected.");
+    }
+  }
 
+  // Future<void> uploadFileFromserver(BuildContext context , File file)async{
+  //   await uploadFile(context, file);
+  //   notifyListeners();
+  // }
+ Future<void> pickFile(BuildContext context) async{
+   try {
+     final result = await FilePicker.platform.pickFiles() ;
+     if (result != null) {
+       File file = File(result.files.single.path!);
+       await uploadFile(context, file);
+     } else {
+       // User canceled the picker
+       print("No file selected.");
+
+     }
+
+   } catch (e) {
+     print(e);
+   }
+ }
   bool state = false;
   Future<List<FileModle>> getFileList() async {
     // Call the API to retrieve the list of files
@@ -44,4 +81,5 @@ class HomePage_provider with ChangeNotifier {
         .toList();
     notifyListeners();
   }
+ 
 }

@@ -1,5 +1,6 @@
 import 'package:drive_clone_app/providers/HomePage_provider.dart';
 import 'package:drive_clone_app/providers/TappedProvider.dart';
+import 'package:drive_clone_app/providers/UploadProvider.dart';
 import 'package:drive_clone_app/screens/MyHomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +10,8 @@ void main() {
       MultiProvider(
           providers:[
             ChangeNotifierProvider(create: (_) => HomePage_provider()),
-            ChangeNotifierProvider(create: (_)=>TappedProvider())
+            ChangeNotifierProvider(create: (_)=>TappedProvider()),
+            ChangeNotifierProvider(create: (_) => UploadProvider())
 
           ],
      child :  const MyApp()

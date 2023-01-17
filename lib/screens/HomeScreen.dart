@@ -1,9 +1,12 @@
 
 
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:drive_clone_app/model/File_modle.dart';
+import 'package:drive_clone_app/screens/uploadScreen.dart';
 import 'package:drive_clone_app/service/Apiservice.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -62,7 +65,23 @@ class HomeScreen extends StatelessWidget {
                        }
                    ),
                  ),
+                 SizedBox(height: 5,),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15,bottom: 15),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child:  FloatingActionButton(
+                      backgroundColor: Colors.black45,
+                      child: Icon(Icons.cloud_upload),
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => uploadScreen()));
+                      }
+                      ,
+                  )
+                   ),
+                )
                ],
+
              ),
            );
         },
