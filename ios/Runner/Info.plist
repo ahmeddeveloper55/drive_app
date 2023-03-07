@@ -2,6 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>UISupportsDocumentBrowser</key>
+    <string>YES</string>
+    <key>LSSupportsOpeningDocumentsInPlace</key>
+    <string>YES</string>
+    <key>UIFileSharingEnabled</key>
+    <string>YES</string>
+	<key>io.flutter.embedded_views_preview</key>
+    <string>YES</string>
+	<key>NSDownloadsFolderUsageDescription</key>
+	<string>This app needs to save downloaded files to the Downloads directory.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

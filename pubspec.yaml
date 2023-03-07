@@ -42,6 +42,21 @@ dependencies:
   provider: ^6.0.4
   flutter_screenutil: ^5.6.0
   file_picker: ^5.2.5
+  flutter_slidable: ^2.0.0
+  dio: ^5.0.0
+  url_launcher: ^6.1.9
+  flutter_downloader: ^1.10.2
+  mime: ^1.0.4
+#  google_sign_in: ^6.0.1
+  firebase_auth: ^4.1.1
+  firebase_core: ^2.1.1
+  audioplayers: ^3.0.1
+  chewie: ^1.4.0
+  video_player: ^2.5.2
+  permission_handler: ^10.2.0
+  google_fonts: ^4.0.3
+  flutter_pdfview: ^1.2.5
+
 
 
 dev_dependencies:
@@ -72,7 +87,7 @@ flutter:
     - assets/google-sheets.png
     - assets/pdf.png
     - assets/photo.png
-    - assets/photographic-film.png
+    - assets/video.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

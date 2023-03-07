@@ -1,4 +1,7 @@
 import 'package:drive_clone_app/providers/TappedProvider.dart';
+import 'package:drive_clone_app/screens/SearchScreen.dart';
+import 'package:drive_clone_app/screens/StarScreen.dart';
+import 'package:drive_clone_app/screens/uploadScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,49 +34,38 @@ class MyHomePage extends StatelessWidget {
                   if (index == 0) {
                     model.widgetBody =  HomeScreen();
                   } else if (index == 1) {
-                    model.widgetBody = Center(child: Text('hell1'));
+                    model.widgetBody = StarScreen();
                   } else if (index == 2) {
-                    model.widgetBody = Center(
-                      child: Text('Hell'),
-                    );
-                  } else if (index == 3) {
-                    model.widgetBody = MyDriveScreen();
+                    model.widgetBody = uploadScreen();
                   }
                   model.currentIndex = index;
                 },
                 items: [
                   BottomNavigationBarItem(
                       icon: model.currentIndex == 0
-                          ? Icon(
+                          ? const Icon(
                         Icons.home,
                         size: 25,
                       )
-                          : Icon(Icons.home_outlined, size: 25),
+                          : const Icon(Icons.home_outlined, size: 25),
                       label: "Home"),
                   BottomNavigationBarItem(
                       icon: model.currentIndex == 1
-                          ? Icon(
+                          ? const Icon(
                         Icons.star,
                         size: 25,
-                      )
-                          : Icon(Icons.star_border_outlined, size: 25),
+                      ): const Icon(Icons.star_border_outlined, size: 25),
                       label: "Starred"),
+
                   BottomNavigationBarItem(
                       icon: model.currentIndex == 2
-                          ? Icon(
-                        Icons.supervised_user_circle,
+                          ? const Icon(
+                        Icons.upload_file,
                         size: 25,
                       )
-                          : Icon(Icons.supervised_user_circle, size: 25),
-                      label: "Shared"),
-                  BottomNavigationBarItem(
-                      icon: model.currentIndex == 3
-                          ? Icon(
-                        Icons.folder,
-                        size: 25,
-                      )
-                          : Icon(Icons.folder_open, size: 25),
-                      label: "Files"),
+                          : Icon(Icons.upload_file_outlined
+                          , size: 25),
+                      label: "Upload"),
                 ],
               );
             },
