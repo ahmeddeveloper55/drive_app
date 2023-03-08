@@ -15,7 +15,7 @@ class uploadScreen extends StatelessWidget {
     final uploadProvider = Provider.of<UploadProvider>(context);
     final homePageProvider = Provider.of<HomePage_provider>(context);
     return Scaffold(
-        backgroundColor: Colors.white30,
+        backgroundColor: Colors.white,
 
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(MediaQuery.of(context).size.height*0.06),
@@ -35,7 +35,7 @@ class uploadScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width*0.9,
 
                     child: MaterialButton(
-                      color: Colors.white38,
+                      color: Colors.white30,
                       onPressed: ()  async{
                         uploadProvider.selectFile();
                       },

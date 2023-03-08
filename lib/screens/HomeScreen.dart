@@ -64,20 +64,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: buildFutureBuilder(model),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                FloatingActionButtonWidget(
-                  backgroundColor: Colors.black,
-                  child: const Icon(Icons.cloud_upload),
-                  onPress: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const uploadScreen()),
-                    );
-                  },
-                )
+                // const SizedBox(
+                //   height: 5,
+                // ),
+                // FloatingActionButtonWidget(
+                //   backgroundColor: Colors.black,
+                //   child: const Icon(Icons.cloud_upload),
+                //   onPress: () async {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (context) => const uploadScreen()),
+                //     );
+                //   },
+                // )
               ],
             ),
           );

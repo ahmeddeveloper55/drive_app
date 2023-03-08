@@ -132,10 +132,12 @@ class CustomSlideableWidget extends StatelessWidget {
   }
 
   Widget _getList(FileModle fileModle, BuildContext context) {
+    final size  = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Center(
         child: Container(
-          padding: const EdgeInsets.only(left: 10, right: 10),
+          padding:  EdgeInsets.only(left: size.width * 0.02, right: size.width * 0.02,top:size.width * 0.02 ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
