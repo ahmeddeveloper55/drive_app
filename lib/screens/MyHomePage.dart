@@ -14,6 +14,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return ChangeNotifierProvider(
         create: (context) => TappedProvider(),
         child: Scaffold(

@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
-import 'package:drive_clone_app/service/Apiservice.dart';
+import 'package:drive_clone_app/Controller/Apiservice.dart';
 import 'package:path/path.dart';
+import 'package:mime/mime.dart';
+import 'package:http_parser/http_parser.dart';
+
 class UploadProvider with ChangeNotifier {
   late File _file;
   late String _fileName;
@@ -32,38 +35,27 @@ void selectFile() async {
   }
 
 
-
+/// Using lookupMimeType to get the proper contentType of File or it will give ['application/octet-stream'] as default value
+  /// and when we need to call  fromBytes we should specify 'file'  -> whcih name tag we have to gave as key while we post new file on postman.
+  ///  _file.readAsBytesSync() to read files bytes synchronously , filename: _fileName , contentType: MediaType.parse(mimeType) : parse mimeType by using MediaType.parse which http.parse function.
+  ///  mimeType will have proper file type
   Future<FileModle?> uploadFileFromserver(BuildContext context)async{
     try {
-     if(Platform.isAndroid){
-       var request = http.MultipartRequest("POST", Uri.parse('$BaseDeploymentUrl/$DomainUrl/upload'));
-       var multipartFile = http.MultipartFile.fromBytes('file', _file.readAsBytesSync(), filename: _fileName);
-       request.files.add(multipartFile);
+        String mimeType = lookupMimeType(_fileName) ?? 'application/octet-stream';
+        var request = http.MultipartRequest("POST", Uri.parse('$BaseDeploymentUrl/$DomainUrl/upload'));
+        var multipartFile = http.MultipartFile.fromBytes('file', _file.readAsBytesSync(), filename: _fileName, contentType: MediaType.parse(mimeType));
+        request.files.add(multipartFile);
 
-       var response = await request.send();
-       if (response.statusCode == 200) {
-         print('File uploaded successfully.');
-         _fileName = '';
-         notifyListeners();
-       } else {
-         print('Failed to upload file');
+        var response = await request.send();
+        if (response.statusCode == 200) {
+          print('File uploaded successfully.');
+          _fileName = '';
+          notifyListeners();
+        } else {
+          print('Failed to upload file');
 
-       }
-     }else{
-       var request = http.MultipartRequest("POST", Uri.parse('$BaseDeploymentUrl/$DomainUrl/upload'));
-       var multipartFile = http.MultipartFile.fromBytes('file', _file.readAsBytesSync(), filename: _fileName);
-       request.files.add(multipartFile);
+        }
 
-       var response = await request.send();
-       if (response.statusCode == 200) {
-         print('File uploaded successfully.');
-         _fileName = '';
-         notifyListeners();
-       } else {
-         print('Failed to upload file');
-
-       }
-     }
     } catch (e) {
       print(e);
 

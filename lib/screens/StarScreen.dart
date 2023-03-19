@@ -1,5 +1,5 @@
 import 'package:drive_clone_app/screens/uploadScreen.dart';
-import 'package:drive_clone_app/service/Apiservice.dart';
+import 'package:drive_clone_app/Controller/Apiservice.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,16 +12,12 @@ class StarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     Apiservice apiservice = Apiservice();
     return Scaffold(
-      backgroundColor: Colors.white30,
 
       appBar: AppBar(
-        title: const Text('Stars page',style: TextStyle(color: Colors.black),),
+        title: const Text('Stars page'),
         centerTitle: false,
-        backgroundColor: Colors.white,
 
       ),
       body: Consumer<HomePage_provider>(
@@ -32,7 +28,7 @@ class StarScreen extends StatelessWidget {
                   child: ListView.builder(
                       itemCount: model.favorites.length,
                       itemBuilder: (context, i) {
-                        FileModle filemodelU = model.favorites![i];
+                        FileModle filemodelU = model.favorites[i];
                         return CustomSlideableWidget(
                             filemodelU: filemodelU,
                             apiservice: apiservice,

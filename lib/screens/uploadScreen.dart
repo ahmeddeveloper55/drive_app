@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../Utils/utils.dart';
+import '../providers/ThemeNotifier.dart';
 import '../providers/UploadProvider.dart';
 
 class uploadScreen extends StatelessWidget {
@@ -14,17 +15,16 @@ class uploadScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final uploadProvider = Provider.of<UploadProvider>(context);
     final homePageProvider = Provider.of<HomePage_provider>(context);
+    final  notifierProvider = Provider.of<ThemeNotifier>(context);
+    final iconColor = notifierProvider.themeData.iconTheme.color;
     return Scaffold(
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white30,
 
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height*0.06),
-          child: AppBar(
+        appBar: AppBar(
             centerTitle: false,
-            backgroundColor: Colors.white,
-            title :  Text("Uploading Screen",style: txtstyle(15.0 , Colors.black , FontWeight.w600),),
+            title :  const Text("Uploading Screen"),
           ),
-        ),
+
         body: Consumer<UploadProvider>(
           builder: (context,value,child){
             return  Center(
@@ -39,7 +39,7 @@ class uploadScreen extends StatelessWidget {
                       onPressed: ()  async{
                         uploadProvider.selectFile();
                       },
-                      child: Text("Select file"),
+                      child: const Text("Select file"),
 
                     ),
                   ),
@@ -49,10 +49,17 @@ class uploadScreen extends StatelessWidget {
                       onPressed: () {
                         if (uploadProvider.file != null) {
                           print("no error");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('File uploaded successfully.')),
+                          );
+
                          value.uploadFileFromserver(context);
 
                         } else {
                           print("error");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('error in  uploaded File.')),
+                          );
                         }
                       },
                       color: Colors.black45,
@@ -64,6 +71,7 @@ class uploadScreen extends StatelessWidget {
             );
           },
 
-        ));
+        )
+    );
   }
 }

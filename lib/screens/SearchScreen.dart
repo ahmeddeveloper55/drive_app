@@ -1,9 +1,10 @@
 import 'package:drive_clone_app/providers/HomePage_provider.dart';
+import 'package:drive_clone_app/providers/ThemeNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../model/File_modle.dart';
-import '../service/Apiservice.dart';
+import '../Controller/Apiservice.dart';
 import '../widgets/CustomSlideableWidget.dart';
 
 class ScearchScreen extends StatefulWidget {
@@ -28,9 +29,7 @@ class _ScearchScreenState extends State<ScearchScreen> {
 
   Future<Null> _onRefresh() async {
     await Future.delayed(Duration(seconds: 3));
-    setState(() {
-      // filteredList = _list;
-    });
+    setState(() {});
     return null;
   }
 
@@ -50,11 +49,14 @@ class _ScearchScreenState extends State<ScearchScreen> {
   }
 
   Widget _getSearch(BuildContext context, TextEditingController controller) {
+    final  notifierProvider = Provider.of<ThemeNotifier>(context);
+    final iconColor = notifierProvider.themeData.iconTheme.color;
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.04,
+        vertical: MediaQuery.of(context).size.height * 0.01,),
       child: Material(
         elevation: 2,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.height * 0.05)),
         child: SizedBox(
           height: 50,
           child: SafeArea(
@@ -66,7 +68,8 @@ class _ScearchScreenState extends State<ScearchScreen> {
                       controller: controller,
                       decoration: const InputDecoration(
                         hintText: "Search in Drive",
-                        prefixIcon: Icon(Icons.search),
+                        prefixIcon: Icon(Icons.search,),
+
                         border: InputBorder.none,
                         //
                       ),
@@ -133,7 +136,7 @@ class _ScearchScreenState extends State<ScearchScreen> {
                   ? ListView.builder(
                   itemCount: filteredList.length,
                   itemBuilder: (context, i) {
-                    FileModle filemodelU = filteredList![i];
+                    FileModle filemodelU = filteredList[i];
                     return CustomSlideableWidget(
                         filemodelU: filemodelU,
                         apiservice: apiservice,

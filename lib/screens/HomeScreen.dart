@@ -6,7 +6,8 @@ import 'package:drive_clone_app/model/File_modle.dart';
 import 'package:drive_clone_app/screens/SearchScreen.dart';
 import 'package:drive_clone_app/screens/View_Files.dart';
 import 'package:drive_clone_app/screens/uploadScreen.dart';
-import 'package:drive_clone_app/service/Apiservice.dart';
+import 'package:drive_clone_app/Controller/Apiservice.dart';
+import 'package:drive_clone_app/widgets/ThemeSwitcher.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/HomePage_provider.dart';
+import '../providers/ThemeNotifier.dart';
 import '../providers/UploadProvider.dart';
 import '../widgets/CustomSlideableWidget.dart';
 import '../widgets/FloatingActionButtonWidget.dart';
@@ -34,14 +36,15 @@ class _HomeScreenState extends State<HomeScreen> {
   // @override
   @override
   Widget build(BuildContext context) {
+    final  notifierProvider = Provider.of<ThemeNotifier>(context);
+    final iconColor = notifierProvider.themeData.iconTheme.color;
     log('build');
     return Scaffold(
-      backgroundColor: Colors.white30,
       appBar: AppBar(
-        title: const Text("FDrive", style:TextStyle(color:Colors.black) ,),
-        backgroundColor: Colors.white,
+        title:  Text("FDrive", style: TextStyle(fontSize: MediaQuery.of(context).size.width*0.028),),
         centerTitle: false,
         actions: [
+          ThemeSwitcher(),
           IconButton(
               onPressed: ()  {
                 Navigator.push(
@@ -50,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       builder: (context) =>  ScearchScreen()),
                 );
               },
-              icon: Icon(Icons.search),
+              icon: Icon(Icons.search,color: iconColor,),
             color: Colors.black,
           ),
 
@@ -64,79 +67,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: buildFutureBuilder(model),
                 ),
-                // const SizedBox(
-                //   height: 5,
-                // ),
-                // FloatingActionButtonWidget(
-                //   backgroundColor: Colors.black,
-                //   child: const Icon(Icons.cloud_upload),
-                //   onPress: () async {
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //           builder: (context) => const uploadScreen()),
-                //     );
-                //   },
-                // )
+
               ],
             ),
           );
         },
       ),
     );
-    // return SafeArea(
-    //   child: Center(
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.center,
-    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    //       children: [
-    //          Container(
-    //                 padding: EdgeInsets.symmetric(horizontal: 18,vertical: 5),
-    //                 child: Material(
-    //                   elevation: 2,
-    //                   borderRadius: BorderRadius.all(Radius.circular(10)),
-    //                   child: SizedBox(
-    //                     height: 50,
-    //                     child: SafeArea(
-    //                       child: TextFormField(
-    //                         controller: myProvider.textController,
-    //                         decoration: InputDecoration(
-    //                           hintText: "Search in Drive",
-    //                           border: InputBorder.none,
-    //                           icon: Container(
-    //                               margin: EdgeInsets.only(left: 10),
-    //                               child: Icon(Icons.dehaze)),
-    //
-    //                         ),
-    //                       ),
-    //                     ),
-    //                   ),
-    //                 ),
-    //               ),
-    //
-    //
-    //        SizedBox(height: 5,),
-    //
-    //
-    //         new Expanded(
-    //           child: _searchresult.length != 0 || controller.text.isNotEmpty
-    //               ? new ListView.builder(
-    //               itemCount: _searchresult.length,
-    //               itemBuilder: (context, i) {
-    //                 FileModle filemodel = _searchresult[i];
-    //                 return _getList(filemodel);
-    //               })
-    //               : ListView.builder(
-    //               itemCount: _list1.length,
-    //               itemBuilder: (context, i) {
-    //                 FileModle filemodelU = _list1[i];
-    //                 return _getList(filemodelU);
-    //               }),
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
+
   }
 
   RefreshIndicator buildFutureBuilder(HomePage_provider model) {
@@ -184,7 +122,7 @@ fileImage(String filename) {
   } else if (filename == "sheets") {
     return Image.asset("assets/google-sheets.png");
   } else if (filename.contains("mp4")) {
-    return Image.asset("assets/google-sheets.png");
+    return Image.asset("assets/video.png");
   } else {
     return Image.asset("assets/pdf.png");
   }

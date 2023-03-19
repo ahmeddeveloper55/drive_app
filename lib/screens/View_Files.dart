@@ -23,10 +23,8 @@ class View_Files extends StatelessWidget {
         preferredSize:
             Size.fromHeight(MediaQuery.of(context).size.height * 0.06),
         child: AppBar(
-          backgroundColor: Colors.black,
           title: Text(
             fileModle.name,
-            style: txtstyle(20.0, Colors.white, FontWeight.w600),
           ),
         ),
       ),

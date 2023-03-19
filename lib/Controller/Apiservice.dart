@@ -12,7 +12,9 @@ import '../model/File_modle.dart';
 
 typedef void OnDownloadProgressCallback(int recvBytes , int totalBytes);
 typedef void OnUploadProgressCallBack(int sentBytes,int totalBytes);
-
+/*
+ This is Controller Package : it contains ->  Apiservice : is the class that has all api calls using future and all api is url that already deployed on railway server
+ */
 class Apiservice{
   static bool trustSelfSigned = true;
 

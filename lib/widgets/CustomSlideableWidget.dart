@@ -5,7 +5,7 @@ import '../model/File_modle.dart';
 import '../providers/HomePage_provider.dart';
 import '../screens/HomeScreen.dart';
 import '../screens/View_Files.dart';
-import '../service/Apiservice.dart';
+import '../Controller/Apiservice.dart';
 
 class CustomSlideableWidget extends StatelessWidget {
   const CustomSlideableWidget(
@@ -57,7 +57,6 @@ class CustomSlideableWidget extends StatelessWidget {
           dismissible: DismissiblePane(
             key: Key(filemodelU.id),
             onDismissed: () {
-              // model.deleteFilefromApi(i);
               showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -83,7 +82,27 @@ class CustomSlideableWidget extends StatelessWidget {
           ),
           children: [
             SlidableAction(
-              onPressed: (context) => {},
+              onPressed: (context) => showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Delete Item'),
+                      content: Text('Are sure You want to delete Item'),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('Cancel')),
+                        TextButton(
+                            onPressed: () {
+                              model.deleteFilefromApi(Index);
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('Yes')),
+                      ],
+                    );
+                  }),
               label: 'Delete',
               icon: Icons.delete,
               backgroundColor: Color(0xFFCF0303),
@@ -132,12 +151,15 @@ class CustomSlideableWidget extends StatelessWidget {
   }
 
   Widget _getList(FileModle fileModle, BuildContext context) {
-    final size  = MediaQuery.of(context).size;
-
+    final size = MediaQuery.of(context).size;
+    final convertedFileSize  =  formatFileSize(fileModle.size);
     return SafeArea(
       child: Center(
         child: Container(
-          padding:  EdgeInsets.only(left: size.width * 0.02, right: size.width * 0.02,top:size.width * 0.02 ),
+          padding: EdgeInsets.only(
+              left: size.width * 0.02,
+              right: size.width * 0.02,
+              top: size.width * 0.02),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -151,7 +173,7 @@ class CustomSlideableWidget extends StatelessWidget {
                   child: Card(
                     child: ListTile(
                       title: Text(fileModle.name.toString()),
-                      subtitle: Text(fileModle.size.toString()),
+                      subtitle: Text(convertedFileSize),
                       trailing: fileImage(fileModle.name.toString()),
                     ),
                   ),
@@ -162,5 +184,22 @@ class CustomSlideableWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+  /// formatFileSize :  is the funtions that will take bytes , size of files that stored  on  PostgresSql as bytes and Converted Dynamically to Proper Size
+  /// if it is less than 1024 bytes will be Bytes as it is , if it is less than 1024^2 will be kiloBytes and so on .
+  /// toStringAsFixed this funtion will take any double on string format  , and take parameter as decimalPlaces , fixed to that , examples : (4321.12345678).toStringAsFixed(2);  // 4321.12
+  String formatFileSize(int bytes,[int decimalPlaces = 2]){
+    if(bytes<1024) {
+      return "$bytes B";
+    }else if(bytes<1024 * 1024){
+      double kilobytes  = bytes / 1024;
+      return '${kilobytes.toStringAsFixed(decimalPlaces)} KB';
+    }else if(bytes < 1024 * 1024 * 1024){
+      double megaBytes = bytes / (1024 * 1024);
+      return '${megaBytes.toStringAsFixed(decimalPlaces)} MB';
+    }else {
+      double gigabytes = bytes / (1024 * 1024 * 1024);
+      return '${gigabytes.toStringAsFixed(decimalPlaces)} GB';
+    }
   }
 }
