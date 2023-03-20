@@ -45,7 +45,7 @@ Fdrive is my Internship project App at VISANKA TECHNOLOGIES .
 ![Screenshot 1444-08-28 at 2 27 26 AM_iphone13progold_portrait](https://user-images.githubusercontent.com/40899021/226220425-4f88e8b5-1474-4b54-9ea3-c19ef063bd83.png)
 ![Screenshot 1444-08-28 at 2 28 03 AM_iphone13progold_portrait](https://user-images.githubusercontent.com/40899021/226220429-d4635c2a-b44f-421c-b66f-aed83bca22e3.png)
 ![Screenshot 1444-08-28 at 2 28 29 AM_iphone13progold_portrait](https://user-images.githubusercontent.com/40899021/226220431-60d26267-a28c-4dda-a87b-2aefff9ef47e.png)
-![Uploading Screenshot 1444-08-28 at 2.28.58 AM_iphone13progold_portrait.png…]()
+
 
 
 ## The Demo of the App:
