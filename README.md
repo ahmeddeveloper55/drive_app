@@ -53,10 +53,14 @@ https://user-images.githubusercontent.com/40899021/226219584-93215950-3a4b-47d1-
 
 ## To Run The App:
 
- ```git clone "repo_link"\n```
- ```cd drive_app\n```
- ```flutter pub get\n```
- ```flutter run\n```
+ ```git clone "repo_link"```
+ 
+ ```cd drive_app```
+ 
+ ```flutter pub get```
+ 
+ ```flutter run```
+ 
 
 
 
