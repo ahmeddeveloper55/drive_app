@@ -7,10 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'HomeScreen.dart';
 
-
-
 class MyHomePage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -32,7 +29,7 @@ class MyHomePage extends StatelessWidget {
                 selectedItemColor: Colors.blue.shade700,
                 onTap: (index) {
                   if (index == 0) {
-                    model.widgetBody =  HomeScreen();
+                    model.widgetBody = HomeScreen();
                   } else if (index == 1) {
                     model.widgetBody = StarScreen();
                   } else if (index == 2) {
@@ -44,36 +41,31 @@ class MyHomePage extends StatelessWidget {
                   BottomNavigationBarItem(
                       icon: model.currentIndex == 0
                           ? const Icon(
-                        Icons.home,
-                        size: 25,
-                      )
+                              Icons.home,
+                              size: 25,
+                            )
                           : const Icon(Icons.home_outlined, size: 25),
                       label: "Home"),
                   BottomNavigationBarItem(
                       icon: model.currentIndex == 1
                           ? const Icon(
-                        Icons.star,
-                        size: 25,
-                      ): const Icon(Icons.star_border_outlined, size: 25),
+                              Icons.star,
+                              size: 25,
+                            )
+                          : const Icon(Icons.star_border_outlined, size: 25),
                       label: "Starred"),
-
                   BottomNavigationBarItem(
                       icon: model.currentIndex == 2
                           ? const Icon(
-                        Icons.upload_file,
-                        size: 25,
-                      )
-                          : Icon(Icons.upload_file_outlined
-                          , size: 25),
+                              Icons.upload_file,
+                              size: 25,
+                            )
+                          : Icon(Icons.upload_file_outlined, size: 25),
                       label: "Upload"),
                 ],
               );
             },
           ),
-        )
-
-
-    );
+        ));
   }
-
 }

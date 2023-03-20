@@ -36,27 +36,31 @@ class _HomeScreenState extends State<HomeScreen> {
   // @override
   @override
   Widget build(BuildContext context) {
-    final  notifierProvider = Provider.of<ThemeNotifier>(context);
+    final notifierProvider = Provider.of<ThemeNotifier>(context);
     final iconColor = notifierProvider.themeData.iconTheme.color;
     log('build');
     return Scaffold(
       appBar: AppBar(
-        title:  Text("FDrive", style: TextStyle(fontSize: MediaQuery.of(context).size.width*0.028),),
+        title: Text(
+          "FDrive",
+          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.028),
+        ),
         centerTitle: false,
         actions: [
           ThemeSwitcher(),
           IconButton(
-              onPressed: ()  {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>  ScearchScreen()),
-                );
-              },
-              icon: Icon(Icons.search,color: iconColor,),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ScearchScreen()),
+              );
+            },
+            icon: Icon(
+              Icons.search,
+              color: iconColor,
+            ),
             color: Colors.black,
           ),
-
         ],
       ),
       body: Consumer<HomePage_provider>(
@@ -67,14 +71,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: buildFutureBuilder(model),
                 ),
-
               ],
             ),
           );
         },
       ),
     );
-
   }
 
   RefreshIndicator buildFutureBuilder(HomePage_provider model) {
@@ -106,11 +108,9 @@ class _HomeScreenState extends State<HomeScreen> {
               } else {
                 return Text(snapshot.error.toString());
               }
-            })
-    );
+            }));
   }
 }
-
 
 fileImage(String filename) {
   if (filename.contains("docs")) {

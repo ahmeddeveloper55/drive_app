@@ -33,8 +33,6 @@ class HomePage_provider with ChangeNotifier {
   List<FileModle> get fileList => _list;
   dynamic get response => _response;
 
-
-
   Future<FileModle?> updateFileName(String id, String newName) async {
     try {
       print("no exception $id and $newName");
@@ -75,16 +73,11 @@ class HomePage_provider with ChangeNotifier {
     return _list;
   }
 
-
-
   bool _loadingState = false;
-  getSearchedList (List<FileModle> _listforSearch)async{
+  getSearchedList(List<FileModle> _listforSearch) async {
     _loadingState = true;
     _searchList = await Apiservice.getFilesFromApi(_listforSearch);
     _loadingState = false;
     notifyListeners();
   }
-
-
-
 }

@@ -38,7 +38,6 @@ class View_Files extends StatelessWidget {
     );
   }
 
-
   showImg(String url) {
     return Center(
       child: Container(
@@ -56,5 +55,4 @@ class View_Files extends StatelessWidget {
       return PdfViewr(fileModle);
     } else {}
   }
-
 }

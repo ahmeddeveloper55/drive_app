@@ -49,14 +49,17 @@ class _ScearchScreenState extends State<ScearchScreen> {
   }
 
   Widget _getSearch(BuildContext context, TextEditingController controller) {
-    final  notifierProvider = Provider.of<ThemeNotifier>(context);
+    final notifierProvider = Provider.of<ThemeNotifier>(context);
     final iconColor = notifierProvider.themeData.iconTheme.color;
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.04,
-        vertical: MediaQuery.of(context).size.height * 0.01,),
+      padding: EdgeInsets.symmetric(
+        horizontal: MediaQuery.of(context).size.width * 0.04,
+        vertical: MediaQuery.of(context).size.height * 0.01,
+      ),
       child: Material(
         elevation: 2,
-        borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.height * 0.05)),
+        borderRadius: BorderRadius.all(
+            Radius.circular(MediaQuery.of(context).size.height * 0.05)),
         child: SizedBox(
           height: 50,
           child: SafeArea(
@@ -68,7 +71,9 @@ class _ScearchScreenState extends State<ScearchScreen> {
                       controller: controller,
                       decoration: const InputDecoration(
                         hintText: "Search in Drive",
-                        prefixIcon: Icon(Icons.search,),
+                        prefixIcon: Icon(
+                          Icons.search,
+                        ),
 
                         border: InputBorder.none,
                         //
@@ -85,8 +90,6 @@ class _ScearchScreenState extends State<ScearchScreen> {
                         onChangesString('');
                       },
                       icon: Icon(Icons.cancel)),
-
-
                 ],
               ),
             ),
@@ -134,21 +137,20 @@ class _ScearchScreenState extends State<ScearchScreen> {
             Expanded(
               child: filteredList.isNotEmpty || controller.text.isNotEmpty
                   ? ListView.builder(
-                  itemCount: filteredList.length,
-                  itemBuilder: (context, i) {
-                    FileModle filemodelU = filteredList[i];
-                    return CustomSlideableWidget(
-                        filemodelU: filemodelU,
-                        apiservice: apiservice,
-                        Index: i,
-                        model: model);
-                  })
+                      itemCount: filteredList.length,
+                      itemBuilder: (context, i) {
+                        FileModle filemodelU = filteredList[i];
+                        return CustomSlideableWidget(
+                            filemodelU: filemodelU,
+                            apiservice: apiservice,
+                            Index: i,
+                            model: model);
+                      })
                   : const Center(
-                child: Text('No Items Found'),
-              ),
+                      child: Text('No Items Found'),
+                    ),
             )
           ],
         ));
   }
-
-  }
+}
