@@ -1,6 +1,5 @@
 # Fdrive App
 
-Fdrive is my Internship project App at VISANKA TECHNOLOGIES .
 
 
 ## Features
