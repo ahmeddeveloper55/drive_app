@@ -22,7 +22,7 @@
 
   * Backend(Server) : 
      . database : PostgresSql
-     . Rest Api  : Spring boot 
+     . Rest Api  : django rest framework
      . deployment : railway
   * Frontend(Flutter) :
      . state Management  : Provider
